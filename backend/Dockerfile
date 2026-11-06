@@ -1,4 +1,4 @@
-FROM php:8.3-cli-alpine
+FROM php:8.4-cli-alpine
 
 RUN apk add --no-cache \
     postgresql-dev \
@@ -16,8 +16,8 @@ WORKDIR /var/www
 
 COPY . .
 
-# Composer install com flags seguras para ambiente docker sem scripts locais
-RUN composer install --no-dev --no-scripts --optimize-autoloader --no-interaction
+# Instalação com composer ignorando checagem estrita de versão no lock se necessário
+RUN composer install --no-dev --no-scripts --optimize-autoloader --no-interaction --ignore-platform-req=php+
 
 RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache \
