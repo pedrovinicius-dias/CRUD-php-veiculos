@@ -16,7 +16,7 @@ WORKDIR /var/www
 
 COPY . .
 
-# Instalação com composer ignorando checagem estrita de versão no lock se necessário
+
 RUN composer install --no-dev --no-scripts --optimize-autoloader --no-interaction --ignore-platform-req=php+
 
 RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache \
